@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,6 +16,9 @@ Route::get('/checkout', function () {
 Route::get('/success_checkout', function () {
     return view('success_checkout');
 })->name('success_checkout');   
+
+Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
+Route::get('auth/google/callback', [UserController::class, 'googleCallback'])->name('user.login.google.callback');
 
 
 Route::get('/dashboard', function () {
