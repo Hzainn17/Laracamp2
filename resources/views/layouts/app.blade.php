@@ -14,7 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <title>Laracamp by BuildWith Angga</title>
+    <title>Laracamp</title>
+    <link rel="icon" href="{{ asset('images/logo-kecil.ico') }}?v=2" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logo-kecil.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logo-kecil.png') }}">
 </head>
 
 <body>

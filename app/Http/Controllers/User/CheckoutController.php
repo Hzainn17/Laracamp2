@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Checkout\Store;
 use App\Models\Camp;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
@@ -21,8 +22,13 @@ class CheckoutController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Camp $camp)
+    public function create(Camp $camp, Request $request)
     {
+        if($camp->isRegistered) {
+            $request->session()->flash('error', "Anda sudah terdaftar di {$camp->title} camp ini.");
+            return redirect()->route('dashboard.user');
+        }
+
         return view('checkout.create', [
             'camp' => $camp
         ]);  
@@ -31,7 +37,7 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Camp $camp)
+    public function store(Store $request, Camp $camp)
     {
         // mapping data request ke dalam array
         $data = $request->all();

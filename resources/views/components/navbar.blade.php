@@ -30,7 +30,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenulink" style="right: 0; left:auto">
                         <li>
-                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('dashboard.user') }}">Dashboard</a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
