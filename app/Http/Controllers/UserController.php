@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\User\AfterRegister;
 use Illuminate\Http\Request;
-use Laravel\Socialite\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -17,8 +19,11 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    
     public function googleCallback() {
-        $callback = Socialite::driver('google')->user();
+        /** @var \Laravel\Socialite\Two\AbstractProvider $socialite */
+        $socialite = Socialite::driver('google');
+        $callback = $socialite->stateless()->user();
         $data = [
             'name' => $callback->getName(),
             'email' => $callback->getEmail(),
@@ -26,7 +31,11 @@ class UserController extends Controller
             'email_verified_at' => now(),
         ];
 
-        $user = User::updateOrCreate(['email' => $data['email']], $data);
+        $user = User::whereEmail($data['email'])->first();
+        if(!$user) {
+            $user = User::create($data);
+            Mail::to($user->email)->send(new AfterRegister($user));
+        }
         Auth::login($user, true);
 
         return redirect()->route('welcome');

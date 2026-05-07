@@ -29,7 +29,6 @@ class Store extends FormRequest
             'email' => 'required|email|unique:users,email,' . Auth::id(),
             'occupation' => 'required|string|max:255',
             'card_number' => 'required|numeric|digits_between:8,16',
-            'expiry_date' => 'required|date_format:Y-m|after:today',
             'cvc' => 'required|numeric|digits:3',
         ];
     }
