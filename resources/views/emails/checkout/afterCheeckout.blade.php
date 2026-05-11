@@ -5,7 +5,7 @@ Hi {{ $checkout->User->name }},
 <br>
 Terimakasih telah melakukan pendaftaran camp {{ $checkout->Camp->title }}.
 
-<x-mail::button :url="route('dashboard.user')">
+<x-mail::button :url="route('user.dashboard')">
 My Dahboard
 </x-mail::button>
 

@@ -28,7 +28,7 @@ class CheckoutController extends Controller
     {
         if($camp->isRegistered) {
             $request->session()->flash('error', "Anda sudah terdaftar di {$camp->title} camp ini.");
-            return redirect()->route('dashboard.user');
+            return redirect()->route('user.dashboard');
         }
 
         return view('checkout.create', [

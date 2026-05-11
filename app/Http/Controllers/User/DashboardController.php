@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Checkout;
 use Illuminate\Http\Request;
+use App\Models\Checkout;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
-    public function dashboard()
+    public function index()
     {
         $checkouts = Checkout::with('Camp')->whereUserId(Auth::id())->get();
         return view('user.dashboard', [

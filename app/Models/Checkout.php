@@ -20,16 +20,23 @@ class Checkout extends Model
         'is_paid',
     ];
 
-    public function setExpiredAttribute($value)
+     /**
+     * Get the Camp that owns the Checkout
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Camp(): BelongsTo
     {
-        $this->attributes['expiry_date'] = date('Y-m-t', strtotime($value));
-    }
-
-    public function Camp () : BelongsTo {
         return $this->belongsTo(Camp::class);
     }
 
-    public function User () : BelongsTo {
+    /**
+     * Get the User that owns the Checkout
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function User(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 }
